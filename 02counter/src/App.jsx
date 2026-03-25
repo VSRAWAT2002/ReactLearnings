@@ -7,25 +7,33 @@ import './App.css'
 function App() {
   // const [count, setCount] = useState(0)
   //  const [count, setCount] = useState9('vijay');
-  let  [counter, mycounterFunc] = useState(10);
+  let [counter, mycounterFunc] = useState(10);
 
 
   // let counter = 0;
   const addValue = () => {
     // console.log("addValue called " + counter);
-    if (counter<20) {
-      counter = counter + 1;
-    mycounterFunc(counter  )
+    if (counter < 20) {
+      // counter = counter + 1;
+
+      mycounterFunc((prevCounter)=> prevCounter +1)
+      mycounterFunc((prevCounter)=> prevCounter +1)
+      mycounterFunc((prevCounter)=> prevCounter +1)
+      mycounterFunc((prevCounter)=> prevCounter +1)
+
+      
+
+
     }
 
   }
 
- const decValue =()=>{
-if (counter >0) {
-     mycounterFunc(counter-1);
-}
-  
- } 
+  const decValue = () => {
+    if (counter > 0) {
+      mycounterFunc(counter - 1);
+    }
+
+  }
   return (
     <>
       <h1>Learn react</h1>
