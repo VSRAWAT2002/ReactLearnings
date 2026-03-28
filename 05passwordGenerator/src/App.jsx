@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useCallback, useEffect, useRef } from 'react'
 
 import './App.css'
 
@@ -22,8 +22,18 @@ function App() {
     }
     setPassword(pass);
   }
-useEffect(() => { passwordGenerator();},
+  //useEffect: rerender part of code(it should be in useEffect array) that changed 
+  useEffect(() => { passwordGenerator(); },
     [length, numAllowed, charAllowed, setPassword])
+
+  //useRef:to give reference any element 
+  const passwordRef = useRef(null);
+  //useCallback: memoize fucntion or its parts
+const copyPasswordClipboard = useCallback(()=>{
+  passwordRef.current?.select();
+  passwordRef.current?.setSelectionRange(0,20);
+  window.navigator.clipboard.writeText(password)},
+  [password])            
 
   return (
     <>
@@ -36,10 +46,11 @@ useEffect(() => { passwordGenerator();},
             placeholder='Password'
             className='outline-none w-full py-1.5 px-3 bg-amber-50 text-fuchsia-600'
             value={password}
-
+            ref={passwordRef}
             readOnly
           />
-          <button className='bg-blue-700 p-2 shrink-0 outline-amber-400 text-pink-500 px-2 py-1 hover:bg-slate-500'>
+          <button onClick={copyPasswordClipboard}
+          className='bg-blue-700 p-2 shrink-0 outline-amber-400 text-pink-500 px-2 py-1 hover:bg-slate-500'>
             Copy
           </button>
 
